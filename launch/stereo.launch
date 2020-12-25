@@ -1,0 +1,35 @@
+<launch>
+  <arg name="car" default="hrt_20d" />
+  <node pkg="stereo_detector" type="stereo_detector" name="stereo_detector" output="screen" >
+    <param name="calib_path" value="yolo_config/calib_imgs" />
+    <param name="onnx_path" value="yolo_config/yolo/yolov3-voc_HIT_3100.onnx" />
+    <param name="trt_path" value="yolo_config/yolo/yolov3-voc_HIT_3100.trt" />
+    <param name="camera_topic_left" value="/camera/leftRaw" />
+    <param name="camera_topic_right" value="/camera/rightRaw" />
+    <param name="car_type" value="$(arg car)" />
+    <rosparam>
+        yolo_width: 800
+        yolo_height: 320
+        yolo_classes: 3
+        yolo_detection_threshold: 0.65
+        yolo_nms_threshold: 0.05
+        max_boxes: 200
+        box_min_size_ratio: 0.012
+        use_int8: false 
+        image_width: 2592
+        image_height: 1038
+        disp_size: 128
+        p1: 10
+        p2_int: 220
+        uniqueness: 0.99f
+        subpixel: false
+        num_paths: 8
+        min_disp: 0
+        lr_max_diff: 1
+        baseline: 7.960516996f
+        force: 1800.57748439764f
+        cxl: 1299
+        cyl: 424
+    </rosparam>
+  </node>
+</launch>
